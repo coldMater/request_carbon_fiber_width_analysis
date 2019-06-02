@@ -65,8 +65,16 @@
 	width: 100%;
 	justify-content: space-between;
 }
+.form-label{
+  font-size: 2rem;
+}
 .input-row{
 	display: flex;
+}
+
+input[type="number"] {
+  font-size: 2rem;
+  width: 200px;
 }
 
 .result-container{
