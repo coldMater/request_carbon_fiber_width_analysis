@@ -1,60 +1,68 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import logo from './logo.svg';
 import { useDropzone } from 'react-dropzone';
 import './App.css';
+import J_Controller from './controller';
+import G_Controller from './controller';
+import Chart from './chart';
 
 const App: React.FC = () => {
+  const [jigwanData, setJigwandata] = useState<number[]>([]);
+  const [gaesumData, setGaesumdata] = useState<number[]>([]);
+  const [jigwanLimit, setJigwanLimit] = useState<number>(2);
+  const [jigwanGap, setJigwanGap] = useState<number>(1);
+  const [gaesumLimit, setGaesumLimit] = useState<number>(2);
+  const [gaesumGap, setGaesumGap] = useState<number>(1);
 
-  const onDrop = useCallback( acceptedFiles => {
-    const reader = new FileReader();
+  const setJigwanData = (data: any) => {
+    setJigwandata(data);
+  }
 
-    reader.onabort = () => console.log('file reading was aborted');
-    reader.onerror = () => console.log('file reading has failed');
-    reader.onload = () => {
-      const binaryStr:string = reader.result as string;
-      console.log(reader);
-      console.log(binaryStr.split('\n'));
-      console.log(binaryStr);
-    }
+  const setGaesumData = (data: any) => {
+    setGaesumdata(data)
+  }
 
-    acceptedFiles.forEach((file:any) => reader.readAsBinaryString(file));
-
-  }, []);
-
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({onDrop});
-  
-  const files = acceptedFiles.map((file:any) => (
-    <li key={file.path}>
-      {file.path}
-    </li>
-  ));
+  const inputFormContainer = (name: string, limit:number, gap: number, setLimit: any, setGap: any) => (
+      <div className="input-form">
+        <div className="input-row">
+			<label className="form-label">하한값&nbsp;</label>
+			<input value={limit} onChange={(e)=>setLimit(e.target.value)}></input>
+		</div>
+		<div className="input-row">
+			<label className="form-label">gap값&nbsp;</label>
+			<input value={gap} onChange={(e)=>setGap(e.target.value)}></input>
+		</div>
+		<div className="input-row">
+			<button>{name} filter</button>
+		</div>
+		</div>
+  )
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>
-          변위 센서 사폭 분석
-        </h1>
-      </header>
-      <div className="controller-container">
-        <section className="controller">
-          <h2>지관 row 데이터 업로드</h2>
-          <div {...getRootProps({className: 'dropzone'})}>
-            <input {...getInputProps()}/>
-            <p>{ files || "지관 파일을 drag 또는 선택해주세요."}</p>
-          </div>
-        </section>
-        <section className="controller">
-          <h2>지관 row 데이터 업로드</h2>
-          <div {...getRootProps({className: 'dropzone'})}>
-            <input {...getInputProps()}/>
-            <p>지관 파일을 drag 또는 선택해주세요.</p>
-          </div>
-        </section>
-      </div>
+		<header className="App-header">
+			<h1>
+			변위 센서 사폭 분석
+			</h1>
+		</header>
+		<div className="controller-container">
+			<J_Controller title={"지관 row 데이터 업로드"} setData = {setJigwanData}/>
+			<G_Controller title={"개섬 row 데이터 업로드"} setData = {setGaesumData}/>
+		</div>
+		<div className="input-form-container">
+			{inputFormContainer("지관", jigwanLimit, jigwanGap, setJigwanLimit, setJigwanGap)}
+			{inputFormContainer("개섬", gaesumLimit, gaesumGap, setGaesumLimit, setGaesumGap)}
+		</div>
 
-      <section className="result-viewer">
-      </section>
+		<hr></hr>
+		<section className="result-container">
+			<div className="result">
+				<Chart data={jigwanData}/>
+			</div>
+			<div className="result">
+				<Chart data={gaesumData}/>
+			</div>
+		</section>
     </div>
   );
 }
