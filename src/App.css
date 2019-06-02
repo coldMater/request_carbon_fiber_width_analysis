@@ -10,7 +10,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,3 +31,26 @@
     transform: rotate(360deg);
   }
 }
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  height: 200px;
+  background-color: #cdcdcd;
+  border: 5px dotted #ababab;
+  margin: 0 10px 0 10px;
+}
+
+.controller-container{
+  display: flex;
+  width: 100%;
+}
+
+.controller{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
