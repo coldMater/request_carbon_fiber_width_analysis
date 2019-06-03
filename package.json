@@ -12,6 +12,7 @@
     "chart.js": "^2.8.0",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
+    "react-clipboard.js": "^2.0.9",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.5",
     "react-scripts": "3.0.1",

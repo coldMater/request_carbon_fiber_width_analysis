@@ -6,10 +6,11 @@ interface IController {
     setData(data: []): any;
     limit: number;
     gap: number;
+    setMaterialInfo?: any;
 }
 
 
-const Controller: React.FC<IController> = ({title, setData, limit, gap}) => {
+const Controller: React.FC<IController> = ({title, setData, limit, gap, setMaterialInfo}) => {
     let data = null;
     const onDrop = useCallback( acceptedFiles => {
         const reader = new FileReader();
@@ -25,6 +26,14 @@ const Controller: React.FC<IController> = ({title, setData, limit, gap}) => {
         }
 
         acceptedFiles.forEach((file:any) => reader.readAsBinaryString(file));
+        acceptedFiles.forEach((file: any) => {
+            const fileName = file.path.split('_');
+            const lot = fileName[0];
+            const doping = fileName[1];
+            const sosungNo = fileName[2];
+            const sizing = fileName[3];
+            setMaterialInfo(lot, doping, sosungNo, sizing);
+        });
 
     }, []);
 
