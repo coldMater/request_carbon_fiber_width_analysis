@@ -112,6 +112,8 @@ const App: React.FC = () => {
 		setJigwanGap(defaultValue.jigwan[threadType].gap);
 		setGaesumLimit(defaultValue.gaesum[threadType].limit);
 		setGaesumGap(defaultValue.gaesum[threadType].gap);
+		jigwanRefresh();
+		gaesumRefresh();
 	}
 
   const inputFormContainer = (name: string, limit:number, gap: number, setLimit: any, setGap: any, refresh: any) => (
