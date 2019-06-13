@@ -223,7 +223,7 @@ const App: React.FC = () => {
 					<div className="copy-button">
 						<Clipboard 
 							data-clipboard-text={
-								`${lot}\t${''}\t${doping}\t${sosungNo}\t${sizing}\t${jigwanStatistics.avg}\t${jigwanStatistics.std}\t${jigwanStatistics.cv}\t${jigwanStatistics.max}\t${jigwanStatistics.min}\t ${gaesumStatistics.avg}\t${gaesumStatistics.std}\t${gaesumStatistics.cv}\t${gaesumStatistics.max}\t${gaesumStatistics.min}`
+								`${lot}\t${threadType}\t${doping}\t${sosungNo}\t${sizing}\t${jigwanStatistics.avg}\t${jigwanStatistics.std}\t${jigwanStatistics.cv}\t${jigwanStatistics.max}\t${jigwanStatistics.min}\t ${gaesumStatistics.avg}\t${gaesumStatistics.std}\t${gaesumStatistics.cv}\t${gaesumStatistics.max}\t${gaesumStatistics.min}`
 							}
 							onSuccess={onCopySuccess}
 						>

@@ -1,7 +1,5 @@
 export default (array: number[]) => {
-    console.log(array);
     const count = array.length;
-    console.log(count);
     const sum = array.reduce((prev, next) => prev + next ,0);
     const avg = sum / count;
     const sumOfDeviation = array.reduce((prev, next) => prev + Math.pow(next - avg, 2) ,0);
