@@ -8,7 +8,8 @@ interface IChart{
 
 const Chart: React.FC<IChart> = ({data, color}) => {
     const chartData = {
-        labels: Array(data.length),
+        type: 'line',
+        labels: Array(data.length).fill(0).map((value, index)=>index),
         datasets: [
             {
                 pointBackgroundColor: color,
@@ -27,10 +28,17 @@ const Chart: React.FC<IChart> = ({data, color}) => {
         legend: false,
         scales: {
             xAxes: [{
-                gridLines: {
-                    display: false,
-                },
-            }],
+                ticks: {
+                    autoSkip: false,
+                    callback: function(value: any, index: any, values: any) {
+                        if(value%500==0){
+                            return value;
+                        }
+                        return null;
+                    },
+                    maxRotation: 0,
+                }
+            }]
         }
     }
     return (
