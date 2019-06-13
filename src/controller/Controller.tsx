@@ -28,11 +28,12 @@ const Controller: React.FC<IController> = ({title, setData, limit, gap, setMater
         acceptedFiles.forEach((file:any) => reader.readAsBinaryString(file));
         acceptedFiles.forEach((file: any) => {
             const fileName = file.path.split('_');
-            const lot = fileName[0];
-            const doping = fileName[1];
-            const sosungNo = fileName[2];
-            const sizing = fileName[3];
-            setMaterialInfo(lot, doping, sosungNo, sizing);
+            const date= fileName[0];
+            const lot = fileName[1];
+            const doping = fileName[2];
+            const sosungNo = fileName[3];
+            const sizing = fileName[4];
+            setMaterialInfo(date, lot, doping, sosungNo, sizing);
         });
 
     }, []);

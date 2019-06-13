@@ -38,6 +38,7 @@ const App: React.FC = () => {
 	const [jigwanStatistics, setJigwanStatistics] = useState({avg: 0, std: 0, cv: 0, max: 0, min: 0})
 	const [gaesumStatistics, setGaesumStatistics] = useState({avg: 0, std: 0, cv: 0, max: 0, min: 0})
 
+	const [date, setDate] = useState("");
 	const [lot, setLot] = useState("");
 	const [doping, setDoping] = useState("");
 	const [sosungNo, setSosungNo] = useState("");
@@ -47,7 +48,8 @@ const App: React.FC = () => {
 
 	const [showCopied, setShowCopied] = useState(false);
 
-	const setMaterialInfo = (lot: string, doping: string, sosungNo: string, sizing: string) => {
+	const setMaterialInfo = (date: string, lot: string, doping: string, sosungNo: string, sizing: string) => {
+		setDate(date);
 		setLot(lot);
 		setDoping(doping);
 		setSosungNo(sosungNo);
@@ -155,8 +157,8 @@ const App: React.FC = () => {
 			</div>
 		</div>
 		<div className="controller-container">
-			<J_Controller title={"지관 row 데이터 업로드"} setData = {setJigwanData} limit={jigwanLimit} gap={jigwanGap} setMaterialInfo={setMaterialInfo}/>
-			<G_Controller title={"개섬 row 데이터 업로드"} setData = {setGaesumData} limit={gaesumLimit} gap={gaesumGap} setMaterialInfo={setMaterialInfo}/>
+			<J_Controller title={"지관 Raw 데이터 업로드"} setData = {setJigwanData} limit={jigwanLimit} gap={jigwanGap} setMaterialInfo={setMaterialInfo}/>
+			<G_Controller title={"개섬 Raw 데이터 업로드"} setData = {setGaesumData} limit={gaesumLimit} gap={gaesumGap} setMaterialInfo={setMaterialInfo}/>
 		</div>
 		<div className="input-form-container">
 			{inputFormContainer("지관", jigwanLimit, jigwanGap, setJigwanLimit, setJigwanGap, jigwanRefresh)}
@@ -185,6 +187,7 @@ const App: React.FC = () => {
 					<div>
 						<table>
 							<tr>
+								<th> 분석일 </th>
 								<th> LOT </th>
 								<th> 사종 </th>
 								<th> 도핑 No </th>
@@ -202,6 +205,7 @@ const App: React.FC = () => {
 								<th> 개섬 min </th>
 							</tr>
 							<tr>
+								<td>{date}{'\t'}</td>
 								<td>{lot}{'\t'}</td>
 								<td>{threadType}{'\t'}</td>
 								<td>{doping+'\t'}</td>
@@ -223,7 +227,7 @@ const App: React.FC = () => {
 					<div className="copy-button">
 						<Clipboard 
 							data-clipboard-text={
-								`${lot}\t${threadType}\t${doping}\t${sosungNo}\t${sizing}\t${jigwanStatistics.avg}\t${jigwanStatistics.std}\t${jigwanStatistics.cv}\t${jigwanStatistics.max}\t${jigwanStatistics.min}\t ${gaesumStatistics.avg}\t${gaesumStatistics.std}\t${gaesumStatistics.cv}\t${gaesumStatistics.max}\t${gaesumStatistics.min}`
+								`${date}\t${lot}\t${threadType}\t${doping}\t${sosungNo}\t${sizing}\t${jigwanStatistics.avg}\t${jigwanStatistics.std}\t${jigwanStatistics.cv}\t${jigwanStatistics.max}\t${jigwanStatistics.min}\t ${gaesumStatistics.avg}\t${gaesumStatistics.std}\t${gaesumStatistics.cv}\t${gaesumStatistics.max}\t${gaesumStatistics.min}`
 							}
 							onSuccess={onCopySuccess}
 						>
