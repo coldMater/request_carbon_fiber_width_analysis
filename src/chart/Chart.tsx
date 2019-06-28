@@ -9,7 +9,7 @@ interface IChart{
 const Chart: React.FC<IChart> = ({data, color}) => {
     const chartData = {
         type: 'line',
-        labels: Array(data.length).fill(0).map((value, index)=>index),
+        labels: Array(3001).fill(0).map((value, index)=>index),
         datasets: [
             {
                 pointBackgroundColor: color,
@@ -38,7 +38,14 @@ const Chart: React.FC<IChart> = ({data, color}) => {
                     },
                     maxRotation: 0,
                 }
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 18,
+                }
             }]
+
         }
     }
     return (
