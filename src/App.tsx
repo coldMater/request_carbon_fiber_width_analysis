@@ -234,6 +234,9 @@ const App: React.FC = () => {
 							{showCopied ? "Copy success!" :"클립보드에 복사"}
 						</Clipboard>
 					</div>
+					<div className="reset-button">
+						<button onClick={()=>window.location.reload()}>RESET</button>
+					</div>
 				</div>
 			</div>
     </div>
